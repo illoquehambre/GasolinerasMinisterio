@@ -12,7 +12,9 @@ export class GasolinerasListComponent implements OnInit {
 
   listGasolineras: Gasolinera[]=[]
   listCarburantes: string[]|undefined=localStorage.getItem('carburantesSeleccionados')?.split(',')
-
+  carburantesSeleccionados: string[]=[];
+  carburantesList: string[] = ['Biodiesel', 'Bioetanol', ' Gas Natural Comprimido', 'Gas Natural Licuado', ' Gases licuados del petróleo', 'Gasoleo A', 'Gasoleo B', 'Gasoleo Premium', 'Gasolina 95 E10', 'Gasolina 95 E5', 'Gasolina 95 E5 Premium', 'Gasolina 98 E10', 'Gasolina 98 E5', 'Hidrogeno'];
+  
 
   constructor(private gasolineraService: GasolineraService) { }
 
@@ -25,6 +27,13 @@ export class GasolinerasListComponent implements OnInit {
       this.listGasolineras=res.ListaEESSPrecio
     })
   }
+  formatLabel(value: number) {
+    if (value > 3) {
+      return Math.round(value / 3);
+    }
+
+    return value;
+  }
 
   /*getListadoFiltrado(){
     this.gasolineraService.getGasolinerasMini().subscribe((res)=>{
@@ -34,17 +43,26 @@ export class GasolinerasListComponent implements OnInit {
 */
 
 comprobarExistencia(gaso: string){
-  if(this.listCarburantes){
-    if(this.listCarburantes.indexOf(gaso)!=-1){
-      return true
-    }else{
-      return false
-    
-  }
-
-  }else{
-      return false
-  }
+  console.log(this.carburantesSeleccionados)
   
+  let existencia=false;
+  if(this.carburantesSeleccionados!=null){
+    if(this.carburantesSeleccionados.indexOf(gaso)!=-1){
+      existencia=true;
+    }
+  }
+  return existencia;
 }
+/*
+  comprobarExistenciaV2(gaso: Gasolinera, limit: number){
+    let valid=false;
+    this.carburantesSeleccionados.forEach(carburante => {
+      
+        if (Number(gaso[`Precio ${carburante}`])>limit) {
+          valid=true;
+        }
+        
+      
+    });
+}*/
 }
