@@ -1,0 +1,11 @@
+
+<mat-card *ngFor="let gaso of listGasolineras">
+    <mat-card-title>{{gaso['Rótulo']}}</mat-card-title>
+    <mat-card-subtitle>Precio Gaolina 95: {{gaso['Precio Gasolina 95 E5']}}€</mat-card-subtitle>
+    <ul>
+        
+        <li>Dirección: {{gaso['Dirección']}}</li>
+        <li>Localidad: {{gaso['Localidad']}}</li>
+    </ul>
+    
+</mat-card>

@@ -1,0 +1,19 @@
+
+<p>
+    <mat-toolbar>
+     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <form action="">
+        <mat-form-field>
+            <mat-label>Carburantes</mat-label>
+            <mat-select [(value)]="carburantesSeleccionados" (valueChange)="seleccionarCarburante()" multiple>
+              <mat-option *ngFor="let carburante of carburantesList" [value]="carburante">{{carburante}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </form>
+    
+  </mat-toolbar>
+  </p>
