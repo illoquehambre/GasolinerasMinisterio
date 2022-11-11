@@ -1,18 +1,67 @@
 <app-tool-bar></app-tool-bar>
 <div class="flex">
-
-    <mat-form-field appearance="fill">
-        <mat-label>Carburantes</mat-label>
-        <mat-select [(value)]="carburantesSeleccionados" (valueChange)="getListado()" multiple>
-            <mat-option *ngFor="let carburante of carburantesList" [value]="carburante">{{carburante}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-
-    <mat-slider thumbLabel [displayWith]="formatLabel" value="3" tickInterval="3" step="0.2" min="0" max="3"
-        aria-label="units"></mat-slider>
+  <mat-form-field appearance="fill">
+    <mat-label>Carburantes</mat-label>
+    <mat-select
+      [(value)]="carburantesSeleccionados"
+      (valueChange)="comprobarExistenciaV2()"
+      
+    >
+      <mat-option
+        *ngFor="let carburante of carburantesList"
+        [value]="'Precio '+carburante"
+        >{{ carburante }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-slider
+    thumbLabel
+    [displayWith]="formatLabel"
+    [(ngModel)]="minValue"
+    tickInterval="3"
+    step="0.2"
+    min="0"
+    max="3"
+    aria-label="units"
+    (valueChange)="comprobarExistenciaV2()"
+  ></mat-slider>
+  <mat-slider
+    thumbLabel
+    [displayWith]="formatLabel"
+    [(ngModel)]="maxValue"
+    tickInterval="3"
+    step="0.2"
+    min="0"
+    max="3"
+    aria-label="units"
+    (valueChange)="comprobarExistenciaV2()"
+  ></mat-slider>
+  
 </div>
 
+<mat-card *ngFor="let gaso of listGasolinerasFiltradas">
+  <mat-card-title>{{ gaso["Rótulo"] }}</mat-card-title>
+  <mat-card-subtitle *ngIf="gaso['Precio Gasolina 95 E5']&&comprobarExistencia('Gasolina 95 E5')">
+    Precio Gasolina 95 E5:
+    {{ gaso["Precio Gasolina 95 E5"] }}€</mat-card-subtitle
+  >
+  <mat-card-subtitle *ngIf="gaso['Precio Gasoleo A']&&comprobarExistencia('Gasoleo A')">
+    Precio Gasoleo A:
+    {{ gaso["Precio Gasoleo A"] }}€</mat-card-subtitle
+  >
+  <mat-card-subtitle *ngIf="gaso['Precio Hidrogeno']&&comprobarExistencia('Hidrogeno')">
+    Precio Hidrogeno:
+    {{ gaso["Precio Hidrogeno"] }}€</mat-card-subtitle
+  >
+
+  <ul>
+    <li>Dirección: {{ gaso["Dirección"] }}</li>
+    <li>Localidad: {{ gaso["Localidad"] }}</li>
+  </ul>
+</mat-card>
+
+<!--
 <mat-card *ngFor="let gaso of listGasolineras">
     <mat-card-title>{{gaso['Rótulo']}}</mat-card-title>
     <mat-card-subtitle *ngIf="gaso['Precio Biodiesel']&&comprobarExistencia('Biodiesel')">Precio Biodiesel:
@@ -51,3 +100,5 @@
     </ul>
 
 </mat-card>
+
+-->

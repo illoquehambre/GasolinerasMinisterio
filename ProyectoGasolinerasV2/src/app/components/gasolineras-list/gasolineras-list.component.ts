@@ -9,22 +9,27 @@ import { GasolineraService } from 'src/app/services/gasolinera.service';
   styleUrls: ['./gasolineras-list.component.css']
 })
 export class GasolinerasListComponent implements OnInit {
+  gasolineraExample: Gasolinera = {} as Gasolinera
+  listGasolineras: Gasolinera[] = []
+  listGasolinerasFiltradas: Gasolinera[] = []
+  listCarburantes: string[] | undefined = []
+  carburantesSeleccionados: keyof typeof this.gasolineraExample = 'Precio Gasolina 95 E5'
+  //carburantesSeleccionados: string
+  carburantesList: string[] = ['Gasoleo A', 'Gasolina 95 E5', 'Hidrogeno'];
+  minValue: number = 0.5
+  maxValue: number = 3
 
-  listGasolineras: Gasolinera[]=[]
-  listCarburantes: string[]|undefined=localStorage.getItem('carburantesSeleccionados')?.split(',')
-  carburantesSeleccionados: string[]=[];
-  carburantesList: string[] = ['Biodiesel', 'Bioetanol', ' Gas Natural Comprimido', 'Gas Natural Licuado', ' Gases licuados del petróleo', 'Gasoleo A', 'Gasoleo B', 'Gasoleo Premium', 'Gasolina 95 E10', 'Gasolina 95 E5', 'Gasolina 95 E5 Premium', 'Gasolina 98 E10', 'Gasolina 98 E5', 'Hidrogeno'];
-  
 
   constructor(private gasolineraService: GasolineraService) { }
 
   ngOnInit(): void {
     this.getListado();
+
   }
 
-  getListado(){
-    this.gasolineraService.getGasolinerasMini().subscribe((res)=>{
-      this.listGasolineras=res.ListaEESSPrecio
+  getListado() {
+    this.gasolineraService.getGasolinerasMini().subscribe((res) => {
+      this.listGasolineras = res.ListaEESSPrecio
     })
   }
   formatLabel(value: number) {
@@ -42,27 +47,41 @@ export class GasolinerasListComponent implements OnInit {
   }
 */
 
-comprobarExistencia(gaso: string){
-  console.log(this.carburantesSeleccionados)
-  
-  let existencia=false;
-  if(this.carburantesSeleccionados!=null){
-    if(this.carburantesSeleccionados.indexOf(gaso)!=-1){
-      existencia=true;
+  comprobarExistencia(gaso: string) {
+    console.log(this.carburantesSeleccionados)
+
+    let existencia = false;
+    if (this.carburantesSeleccionados != null) {
+      if (this.carburantesSeleccionados.indexOf(gaso) != -1) {
+        existencia = true;
+      }
     }
+    return existencia;
   }
-  return existencia;
-}
-/*
-  comprobarExistenciaV2(gaso: Gasolinera, limit: number){
-    let valid=false;
-    this.carburantesSeleccionados.forEach(carburante => {
-      
-        if (Number(gaso[`Precio ${carburante}`])>limit) {
-          valid=true;
+
+
+  comprobarExistenciaV2() {
+    /*let carburantes: string = {} as string
+    carburantes = this.carburantesSeleccionados.toString()
+
+    this.listCarburantes = carburantes.split(',')*/
+    this.listGasolinerasFiltradas = [];
+    let valid = false;
+    console.log(this.carburantesSeleccionados)
+
+    debugger
+    this.listGasolineras.forEach(gaso => {
+
+        console.log(Number(gaso[this.carburantesSeleccionados].replace(',', '.')))
+        //if (this.listCarburantes)
+        //this.listCarburantes.forEach(car => {
+        if (gaso[this.carburantesSeleccionados] && Number(gaso[this.carburantesSeleccionados].replace(',', '.')) > this.minValue && Number(gaso[this.carburantesSeleccionados].replace(',', '.')) < this.maxValue) {
+          valid = true;
+          this.listGasolinerasFiltradas.push(gaso);
         }
-        
-      
+        //})
+
     });
-}*/
+    return this.listGasolinerasFiltradas;
+  }
 }
