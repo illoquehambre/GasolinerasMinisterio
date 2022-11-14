@@ -37,6 +37,21 @@
     aria-label="units"
     (valueChange)="comprobarExistenciaV2()"
   ></mat-slider>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Provincias</mat-label>
+    <mat-select
+      [(value)]="listIDProvincia.keys"
+      (valueChange)="comprobarExistenciaV2()"
+      
+    >
+      <mat-option
+        *ngFor="let nombre of listIDProvincia.values"
+        [value]="'Precio '+nombre"
+        >{{ nombre }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
   
 </div>
 
@@ -58,6 +73,8 @@
   <ul>
     <li>Dirección: {{ gaso["Dirección"] }}</li>
     <li>Localidad: {{ gaso["Localidad"] }}</li>
+    <li>{{ gaso["Provincia"] }}</li>
+    <li>{{ gaso["IDProvincia"] }}</li>
   </ul>
 </mat-card>
 
