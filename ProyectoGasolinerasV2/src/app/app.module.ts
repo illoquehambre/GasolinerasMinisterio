@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     MaterialImportsModule,
     AppRoutingModule, 
-    FormsModule
+    FormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

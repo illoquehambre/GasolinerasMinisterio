@@ -11,8 +11,8 @@ export class ProvinciasService {
 
   constructor(private http: HttpClient) { }
 
-  getGasolineras(): Observable<ProvinciaResponse> {
-    return this.http.get<ProvinciaResponse>(
+  getProvincias(): Observable<ProvinciaResponse[]> {
+    return this.http.get<ProvinciaResponse[]>(
       `${environment.API_BASE_URL}ServiciosRESTCarburantes/PreciosCarburantes/Listados/Provincias/`
     );
   
