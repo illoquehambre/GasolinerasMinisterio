@@ -32,7 +32,9 @@ export class GasolinerasListComponent implements OnInit {
 
   getListado() {
     this.gasolineraService.getGasolinerasMini().subscribe((res) => {
-      this.listGasolineras = res.ListaEESSPrecio
+      this.listGasolineras = res.ListaEESSPrecio;
+      this.listGasolinerasFiltradas = this.listGasolineras;
+
     })
   }
 
