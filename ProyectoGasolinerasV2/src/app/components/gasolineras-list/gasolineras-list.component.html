@@ -38,22 +38,44 @@
     (valueChange)="comprobarExistenciaV2()"
   ></mat-slider>
 
-  <!--
+  
   <mat-form-field appearance="fill">
     <mat-label>Provincias</mat-label>
     <mat-select
-      [(value)]="listIDProvincia.keys"
+      [(value)]="provinciasSeleccionadas"
       (valueChange)="comprobarExistenciaV2()"
-      
+      multiple
     >
+ 
+
       <mat-option
-        *ngFor="let nombre of listIDProvincia.values"
-        [value]="'Precio '+nombre"
-        >{{ nombre }}</mat-option
+        *ngFor="let provincia of listProvincias"
+        [value]="provincia"
+        >{{ provincia.Provincia }}</mat-option
       >
     </mat-select>
   </mat-form-field>
-  -->
+  
+  <button mat-stroked-button (click)="rellenarLista()">Todas las Provincias</button>
+  <button mat-stroked-button (click)="limpiarLista()">Ninguna Provincia</button>
+  
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Number</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.Municipio}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  
 </div>
 
 <mat-card *ngFor="let gaso of listGasolinerasFiltradas">
@@ -79,44 +101,3 @@
   </ul>
 </mat-card>
 
-<!--
-<mat-card *ngFor="let gaso of listGasolineras">
-    <mat-card-title>{{gaso['Rótulo']}}</mat-card-title>
-    <mat-card-subtitle *ngIf="gaso['Precio Biodiesel']&&comprobarExistencia('Biodiesel')">Precio Biodiesel:
-        {{gaso['Precio Biodiesel']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Bioetanol']&&comprobarExistencia('Bioetanol')">Precio Bioetanol:
-        {{gaso['Precio Bioetanol']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gas Natural Comprimido']&&comprobarExistencia('Gas Natural Comprimido')">
-        Precio Gas Natural Comprimido: {{gaso['Precio Gas Natural Comprimido']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gas Natural Licuado']&&comprobarExistencia('Gas Natural Licuado')">Precio Gas
-        Natural Licuado: {{gaso['Precio Gas Natural Licuado']}}€</mat-card-subtitle>
-    <mat-card-subtitle
-        *ngIf="gaso['Precio Gases licuados del petróleo']&&comprobarExistencia('Gases licuados del petróleo')">Precio
-        Gases licuados del petróleo: {{gaso['Precio Gases licuados del petróleo']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gasoleo A']&&comprobarExistencia('Gasoleo A')">Precio Gasoleo A:
-        {{gaso['Precio Gasoleo A']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gasoleo B']&&comprobarExistencia('Gasoleo B')">Precio Gasoleo B:
-        {{gaso['Precio Gasoleo B']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gasoleo Premium']&&comprobarExistencia('Gasoleo Premium')">Precio Gasoleo
-        Premium: {{gaso['Precio Gasoleo Premium']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gasolina 95 E10']&&comprobarExistencia('Gasolina 95 E10')">Precio Gasolina 95
-        E10: {{gaso['Precio Gasolina 95 E10']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gasolina 95 E5']&&comprobarExistencia('Gasolina 95 E5')">Precio Gasolina 95
-        E5: {{gaso['Precio Gasolina 95 E5']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gasolina 95 E5 Premium']&&comprobarExistencia('Gasolina 95 E5 Premium')">
-        Precio Gasolina 95 E5 Premium: {{gaso['Precio Gasolina 95 E5 Premium']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gasolina 98 E10']&&comprobarExistencia('Gasolina 98 E10')">Precio Gasolina 98
-        E10: {{gaso['Precio Gasolina 98 E10']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Gasolina 98 E5']&&comprobarExistencia('Gasolina 98 E5')">Precio Gasolina 98
-        E5: {{gaso['Precio Gasolina 98 E5']}}€</mat-card-subtitle>
-    <mat-card-subtitle *ngIf="gaso['Precio Hidrogeno']&&comprobarExistencia('Gasolina Hidrogeno')">Precio Hidrogeno:
-        {{gaso['Precio Hidrogeno']}}€</mat-card-subtitle>
-    <ul>
-
-        <li>Dirección: {{gaso['Dirección']}}</li>
-        <li>Localidad: {{gaso['Localidad']}}</li>
-    </ul>
-
-</mat-card>
-
--->
