@@ -11,7 +11,7 @@ export class MunicipioService {
 
   constructor(private http: HttpClient) { }
 
-  getMunicipios(id:string): Observable<MunicipiosResponse[]> {
+  getMunicipiosById(id:string): Observable<MunicipiosResponse[]> {
     
     return this.http.get<MunicipiosResponse[]>(
       `${environment.API_BASE_URL}ServiciosRESTCarburantes/PreciosCarburantes/Listados/MunicipiosPorProvincia/${id}`

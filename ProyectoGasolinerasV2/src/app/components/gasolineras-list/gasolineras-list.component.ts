@@ -56,6 +56,7 @@ export class GasolinerasListComponent implements OnInit {
       listadoNombresMunicipios.push(muni.Municipio)
     });*/
 
+    debugger
     const filterValue = value.toLowerCase();
 
     return this.listMunicipiosFiltrados.filter(municipio => municipio.Municipio.toLowerCase().includes(filterValue));
@@ -76,15 +77,18 @@ export class GasolinerasListComponent implements OnInit {
   }
   getMunicipios(id: string) {
     debugger
-    this.municipiosService.getMunicipios(id).subscribe(res => {
+    this.municipiosService.getMunicipiosById(id).subscribe(res => {
       this.listMunicipios = res;
-      console.log(this.listMunicipios)
+
       this.listMunicipiosFiltrados.concat(this.listMunicipios);
+
+      /*this.filteredOptions = this.myControl.valueChanges.pipe(
+        
+        startWith(''),
+        map(value => this.filter(value || '')),
+      ); */
     })
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this.filter(value || '')),
-    );
+    
 
   }
 
@@ -137,6 +141,7 @@ export class GasolinerasListComponent implements OnInit {
       this.getMunicipios(provincia.IDPovincia);
 
     });
+    console.log(this.listMunicipios)
     
 
     this.listGasolineras.forEach(gaso => {
