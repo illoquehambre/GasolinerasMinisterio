@@ -6,14 +6,7 @@
     </button>
     <span>My App</span>
     <span class="example-spacer"></span>
-    <form action="">
-        <mat-form-field>
-            <mat-label>Carburantes</mat-label>
-            <mat-select [(value)]="carburantesSeleccionados" (valueChange)="seleccionarCarburante()" multiple>
-              <mat-option *ngFor="let carburante of carburantesList" [value]="carburante">{{carburante}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-    </form>
+    
     
   </mat-toolbar>
   </p>

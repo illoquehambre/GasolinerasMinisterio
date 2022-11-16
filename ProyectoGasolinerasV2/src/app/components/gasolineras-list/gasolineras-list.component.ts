@@ -47,7 +47,7 @@ export class GasolinerasListComponent implements OnInit {
 
   opcionesFiltrado() {
     debugger
-    
+
   }
 
   filter(value: string): MunicipiosResponse[] {
@@ -63,13 +63,13 @@ export class GasolinerasListComponent implements OnInit {
   }
 
   getListado() {
-    this.gasolineraService.getGasolinerasMini().subscribe((res) => {
+    this.gasolineraService.getGasolineras().subscribe((res) => {
       this.listGasolineras = res.ListaEESSPrecio;
       this.listGasolinerasFiltradas = this.listGasolineras;
     })
   }
   getProvincias() {
-    
+
     this.provinciasService.getProvincias().subscribe((res) => {
       this.listProvincias = res;
       this.provinciasSeleccionadas = this.listProvincias;
@@ -79,8 +79,7 @@ export class GasolinerasListComponent implements OnInit {
     debugger
     this.municipiosService.getMunicipiosById(id).subscribe(res => {
       this.listMunicipios = res;
-
-      this.listMunicipiosFiltrados.concat(this.listMunicipios);
+      this.listMunicipiosFiltrados = this.listMunicipiosFiltrados.concat(res);
 
       /*this.filteredOptions = this.myControl.valueChanges.pipe(
         
@@ -88,7 +87,7 @@ export class GasolinerasListComponent implements OnInit {
         map(value => this.filter(value || '')),
       ); */
     })
-    
+
 
   }
 
@@ -111,7 +110,7 @@ export class GasolinerasListComponent implements OnInit {
 */
 
   comprobarExistencia(gaso: string) {
-    
+
 
     let existencia = false;
     if (this.carburantesSeleccionados != null) {
@@ -130,23 +129,30 @@ export class GasolinerasListComponent implements OnInit {
     this.listCarburantes = carburantes.split(',')*/
     this.listGasolinerasFiltradas = [];
     let valid = false;
-    console.log(this.carburantesSeleccionados)
+    
     let listadoProvinciasV2: string[] = [];
 
     this.listMunicipiosFiltrados = [];
     this.provinciasSeleccionadas.forEach(provincia => {
       listadoProvinciasV2.push(provincia.IDPovincia)
 
-
+      debugger
       this.getMunicipios(provincia.IDPovincia);
+      /*this.municipiosService.getMunicipiosById(provincia.IDPovincia).subscribe(res => {
+        this.listMunicipios = res;
+
+        this.listMunicipiosFiltrados.concat(res);
+      })*/
+
 
     });
-    console.log(this.listMunicipios)
-    
+    console.log(this.listMunicipios);
+    console.log(this.listMunicipiosFiltrados);
+
 
     this.listGasolineras.forEach(gaso => {
 
-      console.log(Number(gaso[this.carburantesSeleccionados].replace(',', '.')))
+    
       //if (this.listCarburantes)
       //this.listCarburantes.forEach(car => {
 
