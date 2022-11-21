@@ -34,12 +34,13 @@ export class GasolinerasListComponent implements OnInit {
   myControl = new FormControl('');
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<MunicipiosResponse[]> = {} as Observable<MunicipiosResponse[]>;
+  
+  gasPosition: google.maps.LatLngLiteral = {} as google.maps.LatLngLiteral;
+  mapZoom = 4;
+  gasPositions: google.maps.LatLngLiteral[] = [];
+  
 
-  nombreMunicipios: string[] = []
-  map = new google.maps.Map(document.getElementById('map')!, {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
+  
 
   
 

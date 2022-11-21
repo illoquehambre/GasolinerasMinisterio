@@ -1,7 +1,4 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Gasolinera } from 'src/app/interfaces/gasolinera.interface';
 

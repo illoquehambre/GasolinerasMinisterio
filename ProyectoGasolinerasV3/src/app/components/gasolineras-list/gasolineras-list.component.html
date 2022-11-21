@@ -86,6 +86,7 @@
     </mat-form-field>
   </form>
 </div>
+<app-map [gasPos]="gasPosition" [zoomInput]="mapZoom" [gasolineras]="listGasolinerasFiltradas"></app-map>
 
 <mat-card *ngFor="let gaso of listGasolinerasFiltradas">
   <mat-card-title>{{ gaso["Rótulo"] }}</mat-card-title>
