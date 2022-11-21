@@ -8,13 +8,16 @@ import { MaterialImportsModule } from './material-imports/material-imports.modul
 import { AppRoutingModule } from './app-routing.module';
 import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 import { FormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './components/map/map.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     GasolinerasListComponent,
-    ToolBarComponent
+    ToolBarComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -23,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     MaterialImportsModule,
     AppRoutingModule, 
     FormsModule,
+    GoogleMapsModule
 
   ],
   providers: [],

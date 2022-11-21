@@ -1,0 +1,9 @@
+<div>
+    <google-map [center]="gasPos" [zoom]="zoomInput">
+        <map-marker-clusterer imagePath="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m1.png?_ga=2.25440445.-1273609795.1666972981"> 
+            <map-marker #marker="mapMarker" *ngFor="let gas of gasolineras" [position]="crearPosicion(gas)" (mapClick)="openInfoWindow(marker, gas)"></map-marker>
+        </map-marker-clusterer>
+        <map-info-window>Hola</map-info-window>
+
+    </google-map>
+</div>

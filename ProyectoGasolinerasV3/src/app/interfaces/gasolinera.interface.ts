@@ -31,6 +31,7 @@ export interface Gasolinera{
     'IDMunicipio': string;
     'IDProvincia': string;
     'IDCCAA': string;
+    
 }
 
 export interface GasolineraResponse {
