@@ -34,7 +34,7 @@ export class GasolinerasListComponent implements OnInit {
   myControl = new FormControl('');
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<MunicipiosResponse[]> = {} as Observable<MunicipiosResponse[]>;
-  
+  userPosition: google.maps.LatLngLiteral = {} as google.maps.LatLngLiteral;
   gasPosition: google.maps.LatLngLiteral = {} as google.maps.LatLngLiteral;
   mapZoom = 4;
   gasPositions: google.maps.LatLngLiteral[] = [];
@@ -49,6 +49,7 @@ export class GasolinerasListComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getLocation();
     this.getListado();
     this.getProvincias();
   }
@@ -188,6 +189,18 @@ export class GasolinerasListComponent implements OnInit {
   rellenarLista() {
     this.provinciasSeleccionadas = this.listProvincias;
     this.comprobarExistenciaV2();
+  }
+
+  getLocation(): void{
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position)=>{
+        this.userPosition = {lat: position.coords.latitude, lng: position.coords.longitude};
+        console.log(this.userPosition);
+        
+      });
+    }else {
+      console.log("Location not found")
+    }
   }
 
 
